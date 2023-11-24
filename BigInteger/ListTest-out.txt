@@ -1,0 +1,41 @@
+
+
+Test Empty_size: [0;32mPASSED[0m
+Test InsertAfter_size: [0;32mPASSED[0m
+Test InsertBefore_size: [0;32mPASSED[0m
+Test EraseAfter_size: [0;32mPASSED[0m
+Test EraseBefore_size: [0;32mPASSED[0m
+Test Concat_size: [0;32mPASSED[0m
+Test Cleanup_size: [0;32mPASSED[0m
+Test EmptyList_position: [0;32mPASSED[0m
+Test MoveFront_position: [0;32mPASSED[0m
+Test MoveBack_position: [0;32mPASSED[0m
+Test MoveNext_position: [0;32mPASSED[0m
+Test MovePrev_position: [0;32mPASSED[0m
+Test InsertAfter_position: [0;32mPASSED[0m
+Test InsertBefore_position: [0;32mPASSED[0m
+Test FindNext_position: [0;32mPASSED[0m
+Test FindPrev_position: [0;32mPASSED[0m
+Test EraseAfter_position: [0;32mPASSED[0m
+Test EraseBefore_position: [0;32mPASSED[0m
+Test Cleanup_position: [0;32mPASSED[0m
+Test Concat_position: [0;32mPASSED[0m
+Test Assign_equals: [0;32mPASSED[0m
+Test InsertAfter_equals: [0;32mPASSED[0m
+Test InsertBefore_equals: [0;32mPASSED[0m
+Test EraseAfter_equals: [0;32mPASSED[0m
+Test EraseBefore_equals: [0;32mPASSED[0m
+Test Cleanup_equals: [0;32mPASSED[0m
+Test Concat_equals: [0;32mPASSED[0m
+Test Empty_clear: [0;32mPASSED[0m
+Test NonEmpty_clear: [0;32mPASSED[0m
+Test MoveNext_value: [0;32mPASSED[0m
+Test MovePrev_value: [0;32mPASSED[0m
+Test PeekNext_value: [0;32mPASSED[0m
+Test PeekPrev_value: [0;32mPASSED[0m
+Test FindNext_value: [0;32mPASSED[0m
+Test FindPrev_value: [0;32mPASSED[0m
+
+You passed 35 out of 35 tests
+You will receive 10 out of 10 possible points on the ListTests
+
