@@ -1,0 +1,126 @@
+DESIGN_NAME: top
+VERILOG_FILES: [dir::src/ibex_alu.v,
+                dir::src/ibex_branch_predict.v,
+                dir::src/ibex_compressed_decoder.v,
+                dir::src/ibex_controller.v,
+                dir::src/ibex_core.v,
+                dir::src/ibex_counter.v,
+                dir::src/ibex_cs_registers.v,
+                dir::src/ibex_csr.v,
+                dir::src/ibex_decoder.v,
+                dir::src/ibex_dummy_instr.v,
+                dir::src/ibex_ex_block.v,
+                dir::src/ibex_fetch_fifo.v,
+                dir::src/ibex_icache.v,
+                dir::src/ibex_id_stage.v,
+                dir::src/ibex_if_stage.v,
+                dir::src/ibex_load_store_unit.v,
+                dir::src/ibex_multdiv_fast.v,
+                dir::src/ibex_multdiv_slow.v,
+                dir::src/ibex_pmp.v,
+                dir::src/ibex_prefetch_buffer.v,
+                dir::src/ibex_register_file_ff.v,
+                dir::src/ibex_register_file_fpga.v,
+                dir::src/ibex_register_file_latch.v,
+                dir::src/ibex_wb_stage.v,
+                dir::src/prim_badbit_ram_1p.v,
+                dir::src/prim_clock_gating.v,
+                dir::src/prim_generic_clock_gating.v,
+                dir::src/prim_generic_ram_1p.v,
+                dir::src/prim_lfsr.v,
+                dir::src/prim_ram_1p.v,
+                dir::src/prim_secded_28_22_dec.v,
+                dir::src/prim_secded_28_22_enc.v,
+                dir::src/prim_secded_39_32_dec.v,
+                dir::src/prim_secded_39_32_enc.v,
+                dir::src/prim_secded_72_64_dec.v,
+                dir::src/prim_secded_72_64_enc.v,
+                dir::src/prim_xilinx_clock_gating.v,
+                dir::src/mem/sky130_sram_1kbyte_1rw1r_32x256_8.v,
+                dir::src/top.v]
+
+# Constraints
+CLOCK_PERIOD: 200
+CLOCK_PORT: clk_i
+IO_DELAY_CONSTRAINT: 1
+OUTPUT_CAP_LOAD: 6
+MAX_TRANSITION_CONSTRAINT: 1.5
+
+# Antennas
+FP_SIZING: relative
+FP_CORE_UTIL: 20
+GRT_ANTENNA_ITERS: 10
+RUN_HEURISTIC_DIODE_INSERTION: true
+
+# Must create base.sdc
+PNR_SDC_FILE: dir::base.sdc
+# Must create signoff.sdc
+SIGNOFF_SDC_FILE: dir::signoff.sdc
+
+# lef write configuration
+MAGIC_WRITE_LEF_PINONLY: true
+MAGIC_LEF_WRITE_USE_GDS: false
+
+# drc tool configuration
+RUN_MAGIC_DRC: false
+RUN_KLAYOUT_DRC: true
+RUN_MAGIC_STREAMOUT: false
+RUN_KLAYOUT_STREAMOUT: true
+RUN_KLAYOUT_XOR: false
+PRIMARY_GDSII_STREAMOUT_TOOL: klayout
+
+MACROS: 
+  sky130_sram_1kbyte_1rw1r_32x256_8:
+    instances:
+      mem_inst0:
+        location: [50, 50]
+        orientation: N
+      mem_inst1:
+        location: [650, 650]
+        orientation: N
+
+    gds: dir::src/mem/sky130_sram_1kbyte_1rw1r_32x256_8.gds
+    lef: dir::src/mem/sky130_sram_1kbyte_1rw1r_32x256_8.lef 
+    lib: 
+      "*": dir::src/mem/sky130_sram_1kbyte_1rw1r_32x256_8_TT_1p8V_25C.lib
+
+# This will only run one corner. Good for exploration, but not full sign-off!
+#STA_CORNERS: [nom_tt_025C_1v80]
+PDN_MACRO_CONNECTIONS: ["mem_inst0 vccd1 vssd1 vccd1 vssd1", "mem_inst1 vccd1 vssd1 vccd1 vssd1"]
+VERILOG_POWER_DEFINE: USE_POWER_PINS
+
+# Error Waiving
+ERROR_ON_PDN_VIOLATIONS: false
+ERROR_ON_LINTER_ERRORS: false
+ERROR_ON_SYNTH_CHECKS: false
+
+VDD_NETS: ["vccd1"]
+GND_NETS: ["vssd1"]
+
+PL_MAX_DISPLACEMENT_X: 500
+PL_MAX_DISPLACEMENT_Y: 100
+
+# Must create pin_order.cfg
+FP_PIN_ORDER_CFG: dir::pin_order.cfg
+
+# PDN
+FP_PDN_VOFFSET: 5
+FP_PDN_HOFFSET: 5
+FP_PDN_VWIDTH: 2
+FP_PDN_HWIDTH: 2
+FP_PDN_VPITCH: 30
+FP_PDN_HPITCH: 30
+FP_PDN_SKIPTRIM: true
+
+# Violation Handling
+RUN_POST_GRT_RESIZER_TIMING: true
+RUN_POST_GRT_DESIGN_REPAIR: true
+GRT_RESIZER_ALLOW_SETUP_VIOS: true
+GRT_DESIGN_REPAIR_MAX_CAP_PCT: 50
+GRT_DESIGN_REPAIR_MAX_SLEW_PCT: 50
+PL_RESIZER_HOLD_SLACK_MARGIN: 0.2
+GRT_RESIZER_HOLD_SLACK_MARGIN: 0.2
+GRT_DESIGN_REPAIR_MAX_WIRE_LENGTH: 800
+GRT_RESIZER_HOLD_MAX_BUFFER_PCT: 60
+
+GPL_CELL_PADDING: 1
